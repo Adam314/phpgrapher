@@ -1,0 +1,8 @@
+{
+  "name": "adam314/phpgrapher",
+  "description": "A graphical visualizer for PHP code",
+  "homepage": "https://github.com/Adam314/phpgrapher",
+  "require": {
+    "php": "8.0.0"
+  }
+}
