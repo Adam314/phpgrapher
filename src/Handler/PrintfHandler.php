@@ -1,6 +1,8 @@
 <?php
 namespace Adam314\PhpGrapher\Handler;
 
+use Adam314\PhpGrapher\CodeTraverser\Relation;
+
 class PrintfHandler implements HandlerInterface
 {
 
@@ -24,8 +26,8 @@ class PrintfHandler implements HandlerInterface
         printf("depends on %s\n", $dependencyName);
     }
 
-    public function handleRelation(string $source, string $relationType, string $target): void
+    public function handleRelation(string $source, Relation $relationType, string $target): void
     {
-        printf("%s --[%s]--> %s\n", $source, $relationType, $target);
+        printf("%s --[%s]--> %s\n", $source, $relationType->value, $target);
     }
 }

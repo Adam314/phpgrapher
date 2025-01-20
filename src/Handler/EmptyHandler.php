@@ -1,6 +1,8 @@
 <?php
 namespace Adam314\PhpGrapher\Handler;
 
+use Adam314\PhpGrapher\CodeTraverser\Relation;
+
 /**
  * This class does nothing in all the methods.
  * It's useful for implementing only selected handle methods, just create subclass of it
@@ -25,7 +27,7 @@ class EmptyHandler implements HandlerInterface
     {
     }
 
-    public function handleRelation(string $source, string $relationType, string $target): void
+    public function handleRelation(string $source, Relation $relationType, string $target): void
     {
     }
 }
