@@ -1,11 +1,13 @@
 <?php
 namespace Adam314\PhpGrapher\Tests;
 use Adam314\PhpGrapher\CodeTraverser\CodeTraverser;
-use Adam314\PhpGrapher\Handler\PrintfHandler;
+use Adam314\PhpGrapher\Handler\MermaidHandler;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$handler = new PrintfHandler();
+$handler = new MermaidHandler('TB');
 $traverser = new CodeTraverser($handler);
 
-$traverser->traverseClass(PrintfHandler::class);
+$traverser->traverseClass(CodeTraverser::class);
+
+echo $handler->getMermaidChart();

@@ -12,7 +12,7 @@ Should produce output including all subclasses, interfaces, traits and superclas
 
 
 ```mermaid
-flowchart LR
+flowchart TB
     Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has method|__construct
     Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has method|traverseClass
     Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|traverseInterfaces

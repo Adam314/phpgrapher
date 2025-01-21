@@ -3,33 +3,16 @@ namespace Adam314\PhpGrapher\Handler;
 
 use Adam314\PhpGrapher\CodeTraverser\Relation;
 
-class MermaidHandler implements HandlerInterface
+class MermaidHandler extends EmptyHandler
 {
     protected $data = [];
 
-    public function __construct()
+    /**
+     * @param string $flowchartType Possible options: TB, BT, RL, LR
+     */
+    public function __construct(string $flowchartType = 'LR')
     {
-        $this->data[] = 'flowchart LR';
-    }
-
-    public function handleClass(string $className): void
-    {
-        // TODO: Implement handleClass() method.
-    }
-
-    public function handleMethod(string $methodName, string $className): void
-    {
-        // TODO: Implement handleMethod() method.
-    }
-
-    public function handleProperty(string $propertyName, string $className): void
-    {
-        // TODO: Implement handleProperty() method.
-    }
-
-    public function handleDependency(string $dependencyName): void
-    {
-        // TODO: Implement handleDependency() method.
+        $this->data[] = 'flowchart ' . $flowchartType;
     }
 
     public function handleRelation(string $source, Relation $relationType, string $target): void
