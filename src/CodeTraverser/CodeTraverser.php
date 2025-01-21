@@ -49,8 +49,11 @@ class CodeTraverser {
 
         if ($this->traverseMethods) {
             foreach ($reflectionClass->getMethods() as $method) {
-                $this->handler->handleMethod($method->getName(), $className);
-                $this->handler->handleRelation($className, Relation::HAS_METHOD, $method->getName());
+                // skip inherited methods, show only the ones declared in this class
+                if ($method->getDeclaringClass()->getName() === $className) {
+                    $this->handler->handleMethod($method->getName(), $className);
+                    $this->handler->handleRelation($className, Relation::HAS_METHOD, $method->getName());
+                }
             }
         }
 

@@ -29,9 +29,5 @@ flowchart TB
     MermaidHandler-->|has method|__construct
     MermaidHandler-->|has method|handleRelation
     MermaidHandler-->|has method|getMermaidChart
-    MermaidHandler-->|has method|handleClass
-    MermaidHandler-->|has method|handleMethod
-    MermaidHandler-->|has method|handleProperty
-    MermaidHandler-->|has method|handleDependency
     MermaidHandler-->|has property|data
 ```
