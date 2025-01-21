@@ -1,25 +1,37 @@
 # phpgrapher
-A tool to draw diagrams of php classes
 
-Goal:
+## What is PHPGrapher?
 
-A code like:
+A tool to draw diagrams of php classes.
+
+## How it works?
+
+Given a PHP class, PHP Grapher can draw a diagram of it's components and dependencies. Let's say we want a diagram of a `MermaidHandler` class from this package:
+
 ````php
-$traverser = new CodeTraverser(new PrintfHandler());
-$traverser->traverseClass(SomeClass::class); 
+$handler = new MermaidHandler();
+$traverser = new CodeTraverser($handler);
+$traverser->traverseClass(MermaidHandler::class); 
+echo $handler->getMermaidChart();
 ````
-Should produce output including all subclasses, interfaces, traits and superclasses plus all classes used in the constructor arguments.
-
+This will produce a diagram in mermaid format, which embeded in markdown looks like this:
 
 ```mermaid
 flowchart TB
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has method|__construct
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has method|traverseClass
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|traverseInterfaces
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|traverseClasses
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|traverseTraits
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|traverseMethods
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|traverseProperties
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|traversingDepth
-    Adam314\PhpGrapher\CodeTraverser\CodeTraverser-->|has property|handler
+    MermaidHandler-->|extends class|EmptyHandler
+    EmptyHandler-->|implements|HandlerInterface
+    EmptyHandler-->|has method|handleClass
+    EmptyHandler-->|has method|handleMethod
+    EmptyHandler-->|has method|handleProperty
+    EmptyHandler-->|has method|handleDependency
+    EmptyHandler-->|has method|handleRelation
+    MermaidHandler-->|implements|HandlerInterface
+    MermaidHandler-->|has method|__construct
+    MermaidHandler-->|has method|handleRelation
+    MermaidHandler-->|has method|getMermaidChart
+    MermaidHandler-->|has method|handleClass
+    MermaidHandler-->|has method|handleMethod
+    MermaidHandler-->|has method|handleProperty
+    MermaidHandler-->|has method|handleDependency
+    MermaidHandler-->|has property|data
 ```

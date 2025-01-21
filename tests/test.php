@@ -8,6 +8,6 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $handler = new MermaidHandler('TB');
 $traverser = new CodeTraverser($handler);
 
-$traverser->traverseClass(CodeTraverser::class);
+$traverser->traverseClass(MermaidHandler::class);
 
 echo $handler->getMermaidChart();
