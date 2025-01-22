@@ -8,4 +8,5 @@ enum Relation: string
     case USES_TRAIT = 'uses trait';
     case HAS_METHOD = 'has method';
     case HAS_PROPERTY = 'has property';
+    case USES = 'uses';
 }

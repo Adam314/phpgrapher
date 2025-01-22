@@ -29,6 +29,16 @@ class CodeTraverser {
         // Handle the class itself
         $this->handler->handleClass($className);
 
+        if ($constructor = $reflectionClass->getConstructor()) {
+            foreach ($constructor->getParameters() as $parameter) {
+                $this->handler->handleRelation(
+                    $className,
+                    Relation::USES,
+                    $parameter->getType()->getName()
+                );
+            }
+        }
+
         // Handle parent class relation
         if ($parentClass = $reflectionClass->getParentClass()) {
             $this->handler->handleRelation($className, Relation::EXTENDS_CLASS, $parentClass->getName());
@@ -50,10 +60,15 @@ class CodeTraverser {
         if ($this->traverseMethods) {
             foreach ($reflectionClass->getMethods() as $method) {
                 // skip inherited methods, show only the ones declared in this class
-                if ($method->getDeclaringClass()->getName() === $className) {
-                    $this->handler->handleMethod($method->getName(), $className);
-                    $this->handler->handleRelation($className, Relation::HAS_METHOD, $method->getName());
+                if ($method->getDeclaringClass()->getName() !== $className) {
+                    continue;
                 }
+                // skip constructor and destructor, they are handled separately
+                if ($method->isConstructor() || $method->isDestructor()) {
+                    continue;
+                }
+                $this->handler->handleMethod($method->getName(), $className);
+                $this->handler->handleRelation($className, Relation::HAS_METHOD, $method->getName());
             }
         }
 
